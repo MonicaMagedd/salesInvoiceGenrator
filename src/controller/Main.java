@@ -9,7 +9,7 @@ import java.text.ParseException;
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) throws IOException, ParseException {
+    public static void main(String[] args) {
         InvoiceHeader invoiceInvoiceHeader = new InvoiceHeader();
         InvoiceLine invoiceLine = new InvoiceLine();
         Printer printer = new Printer();
