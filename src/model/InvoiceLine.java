@@ -1,5 +1,13 @@
 package model;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 public class InvoiceLine extends InvoiceHeader {
     private String itemName;
     private double itemPrice;
@@ -38,14 +46,37 @@ public class InvoiceLine extends InvoiceHeader {
         return count;
     }
 
-
     @Override
     public String toString() {
-        return "InvoiceLine{" +
-                "Invoice Number=" + getInvoiceNumber() +
-                "Item Name='" + getItemName() + '\'' +
-                ", Item Price=" + getItemName() +
-                ", Count=" + getCount() +
-                '}';
+        return this.getItemName()
+                + ", " + this.getItemPrice() + ", "
+                + this.getCount() + "";
+    }
+
+    public List<InvoiceHeader> performReadAction(List<InvoiceHeader> invoiceHeadersList) throws IOException {
+        FileOperations file = new FileOperations("InvoiceLines.csv");
+        BufferedReader br  = file.readFile();
+        String line = file.getLine();
+        String splitBy = file.getSplitBy();
+        try {
+            while ((line = br.readLine()) != null)   //returns a Boolean value
+            {
+                String[] readInvoiceLines = line.split(splitBy);
+                int invoiceNumber = Integer.parseInt(readInvoiceLines[0]);
+                String itemName = readInvoiceLines[1];
+                int itemPrice = Integer.parseInt(readInvoiceLines[2]);
+                InvoiceHeader invoiceHeader = invoiceHeadersList
+                        .stream()
+                        .filter(p -> p.getInvoiceNumber() == invoiceNumber).findFirst().get();
+                InvoiceLine invoiceLine = new InvoiceLine(invoiceNumber, itemName, itemPrice);
+                invoiceHeader.setLines(invoiceLine);
+            }
+        } catch (IOException e)
+        {
+            throw new IOException(e);
+        }
+        finally {
+            return invoiceHeadersList;
+        }
     }
 }
