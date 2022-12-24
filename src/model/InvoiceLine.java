@@ -54,7 +54,7 @@ public class InvoiceLine extends InvoiceHeader {
     }
 
     public List<InvoiceHeader> performReadAction(List<InvoiceHeader> invoiceHeadersList) throws IOException {
-        FileOperations file = new FileOperations("InvoiceLines.csv");
+        FileOperations file = new FileOperations("src/InvoiceLines.csv");
         BufferedReader br  = file.readFile();
         String line = file.getLine();
         String splitBy = file.getSplitBy();
