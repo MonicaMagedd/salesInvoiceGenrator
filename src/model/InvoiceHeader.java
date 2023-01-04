@@ -73,7 +73,7 @@ public class InvoiceHeader {
                 +this.getCustomerName();
     }
     public List<InvoiceHeader> performReadAction() throws IOException, ParseException {
-        FileOperations file = new FileOperations("src/InvoiceHeader.csv");
+        FileOperations file = new FileOperations("src/view/files/InvoiceHeader.csv");
         BufferedReader br  = file.readFile();
         String line = file.getLine();
         String splitBy = file.getSplitBy();
