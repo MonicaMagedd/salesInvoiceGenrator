@@ -88,13 +88,18 @@ public class InvoiceHeader {
                 invoiceHeadersList.add(invoiceHeader);
             }
         }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         catch (ParseException e)
         {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+
         }
         catch (IOException e)
         {
-            throw new IOException(e);
+            e.printStackTrace();
+
         }
          finally
         {

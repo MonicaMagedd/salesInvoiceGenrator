@@ -28,6 +28,9 @@ public class FileOperations {
         //parsing a CSV file into BufferedReader class constructor
         br.readLine();
         }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         catch (IOException e) {
             e.printStackTrace();
         } finally {

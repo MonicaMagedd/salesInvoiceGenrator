@@ -3,6 +3,7 @@ package view;
 import model.InvoiceHeader;
 import model.InvoiceLine;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
@@ -10,14 +11,18 @@ import java.util.List;
 public class Printer {
     public void print(InvoiceHeader invoiceInvoiceHeader, InvoiceLine invoiceLine) {
         List<InvoiceHeader> invoiceHeadersList;
-        List<InvoiceHeader> finallyinvoiceHeadersList;
+        List<InvoiceHeader> finallyinvoiceHeadersList = null;
         try {
             invoiceHeadersList = invoiceInvoiceHeader.performReadAction();
             finallyinvoiceHeadersList = invoiceLine.performReadAction(invoiceHeadersList);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
         } catch (ParseException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
         for (int i = 0; i < finallyinvoiceHeadersList.size(); i++) {
             InvoiceHeader header = finallyinvoiceHeadersList.get(i);

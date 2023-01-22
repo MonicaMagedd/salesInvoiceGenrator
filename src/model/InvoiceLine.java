@@ -1,6 +1,7 @@
 package model;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -71,9 +72,14 @@ public class InvoiceLine extends InvoiceHeader {
                 InvoiceLine invoiceLine = new InvoiceLine(invoiceNumber, itemName, itemPrice);
                 invoiceHeader.setLines(invoiceLine);
             }
-        } catch (IOException e)
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        catch (IOException e)
         {
-            throw new IOException(e);
+            e.printStackTrace();
+
         }
         finally {
             return invoiceHeadersList;
