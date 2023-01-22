@@ -18,11 +18,16 @@ public class Printer {
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
+            System.out.println("File path is wrong");
         }
         catch (IOException e) {
             e.printStackTrace();
-        } catch (ParseException e) {
+            System.out.println("there is an error in reading/writing file");
+        }
+        catch (ParseException e)
+        {
             e.printStackTrace();
+            System.out.println("there is an error in parsing dates");
         }
         for (int i = 0; i < finallyinvoiceHeadersList.size(); i++) {
             InvoiceHeader header = finallyinvoiceHeadersList.get(i);

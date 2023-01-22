@@ -75,11 +75,11 @@ public class InvoiceLine extends InvoiceHeader {
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
+            System.out.println("File path is wrong");
         }
-        catch (IOException e)
-        {
+        catch (IOException e) {
             e.printStackTrace();
-
+            System.out.println("there is an error in reading/writing file");
         }
         finally {
             return invoiceHeadersList;
